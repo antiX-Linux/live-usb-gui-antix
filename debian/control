@@ -1,0 +1,14 @@
+Source: live-usb-gui-antix
+Section: system
+Priority: optional
+Maintainer: anticapitalista <antiX@operamail.com>
+Build-Depends: debhelper (>= 9.20120115)
+Standards-Version: 3.9.4
+Homepage: http://antix.mepis.org
+
+Package: live-usb-gui-antix
+Architecture: all 
+Depends: live-usb-cli-antix, yad, python, python-gtk2, python-gtkglext1 
+Conflicts: live-usb-antix 
+Replaces: live-usb-antix   
+Description: Run antiX live with persistence on a usb device.
