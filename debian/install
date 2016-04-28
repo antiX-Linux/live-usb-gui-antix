@@ -1,5 +1,4 @@
 live-usb.desktop       /usr/share/applications/antix 
-antix2usb.glade        /usr/share/antix2usb  
-changelog.gz           /usr/share/doc/live-usb-gui-antix   
-copyright              /usr/share/doc/live-usb-gui-antix 
+antix2usb.glade        /usr/share/antix2usb 
+antix2usb.py	       /usr/local/bin
 locale/*               /usr/share/locale 

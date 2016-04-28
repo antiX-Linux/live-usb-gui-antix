@@ -51,7 +51,7 @@ APP_VERSION = "13.0.0"
 APP_DATE = "2013/05/13"
 
 # Help
-HTML_HELP_FILE = "/usr/share/antiX/FAQ/persistence.html"
+HTML_HELP_FILE = "http://www.mepiscommunity.org/user_manual_mx15/mxum.html#antix2usb"
 
 # Default sizes for persistence files
 HOMEFS_DEFAULT_SIZE = 256
@@ -77,6 +77,7 @@ LANGUAGES = [["bg_BG", "Bulgarian"],
     ["lang=pt_PT", "Portuguese (Portugal)"],
     ["lang=ro_RO", "Romanian"],
     ["lang=ru_RU", "Russian"],
+    ["lang=se_SV", "Swedish"],
     ["lang=uk_UA", "Ukrainian"]
     ]
 
@@ -260,7 +261,7 @@ class Data:
         self.partition_min_size = 1024
         self.partition_max_size = 4096
         # File system
-        self.format = "ext2"
+        self.format = "ext4"
         self.bootloader = "extlinux"
         self.persistence = "none"
         
@@ -493,7 +494,7 @@ Estimated minimum partition size is %d MB" % req_size)
 # full_device_checkbutton  GtkCheckButton     on_full_device_checkbutton_toggled
 # partition_size_spinbutton  GtkSpinButton    on_partition_size_spinbutton_value_changed
 # language_combobox        GtkComboBox        on_language_combobox_changed
-# ext2_radiobutton         GtkRadioButton     on_ext2_radiobutton_toggled
+# ext4_radiobutton         GtkRadioButton     on_ext4_radiobutton_toggled
 # fat32_radiobutton        GtkRadioButton     on_fat32_radiobutton_toggled
 # extlinux_radiobutton     GtkRadioButton     on_extlinux_radiobutton_toggled
 # grub_radiobutton         GtkRadioButton     on_grub_radiobutton_toggled
@@ -582,7 +583,6 @@ class AntixUsbGui(object):
         # Right vbox
         self.options_frame = self.builder.get_object("options_frame")
         self.options_frame.set_property('width-request', 220)
-        self.ext2_radiobutton = self.builder.get_object("ext2_radiobutton")
         self.ext4_radiobutton = self.builder.get_object("ext4_radiobutton")
         self.fat32_radiobutton = self.builder.get_object("fat32_radiobutton")
         self.extlinux_radiobutton = self.builder.get_object("extlinux_radiobutton")
@@ -732,12 +732,14 @@ class AntixUsbGui(object):
 
     def on_help_button_clicked(self, widget):
         # print "on_help_button_clicked"
-        if os.path.exists(HTML_HELP_FILE) and os.access(HTML_HELP_FILE, os.R_OK):
-            help_cmd = "x-www-browser " + HTML_HELP_FILE + " &"
-            os.popen(help_cmd)
-        else:
-            warning_dialog("Sorry, Cannot find help file.")
-        pass
+        #if os.path.exists(HTML_HELP_FILE) and os.access(HTML_HELP_FILE, os.R_OK):
+        #    help_cmd = "x-www-browser " + HTML_HELP_FILE + " &"
+        #    os.popen(help_cmd)
+        #else:
+        #    warning_dialog("Sorry, Cannot find help file.")
+        #pass
+        help_cmd = "mx-viewer " + HTML_HELP_FILE + " &"
+        os.popen(help_cmd)
 
     def on_quit_button_clicked(self, widget):
         # print "on_quit_button_clicked"
@@ -795,9 +797,7 @@ class AntixUsbGui(object):
     def on_format_radiobutton_toggled(self, widget):
         #print "on_format_radiobutton_toggled"
         widget.handler_block_by_func(self.on_format_radiobutton_toggled)
-        if widget == self.ext2_radiobutton and widget.get_active():
-             self.set_format("ext2")
-        elif widget == self.ext4_radiobutton and widget.get_active():
+        if widget == self.ext4_radiobutton and widget.get_active():
              self.set_format("ext4")
         elif widget == self.fat32_radiobutton and widget.get_active():
              self.set_format("fat32")
@@ -970,10 +970,10 @@ class AntixUsbGui(object):
             self.syslinux_radiobutton.set_active(True)
             self.extlinux_radiobutton.set_sensitive(False)
             self.grub_radiobutton.set_sensitive(False)
-            self.persist_home_checkbutton.set_sensitive(False)
-            self.persist_root_checkbutton.set_sensitive(False)
-            self.homefs_size_spinbutton.set_sensitive(False)
-            self.rootfs_size_spinbutton.set_sensitive(False)
+            self.persist_home_checkbutton.set_sensitive(True)
+            self.persist_root_checkbutton.set_sensitive(True)
+            self.homefs_size_spinbutton.set_sensitive(True)
+            self.rootfs_size_spinbutton.set_sensitive(True)
         else:
             if bootloader == "syslinux":
                 bootloader = "extlinux"

@@ -1,3 +1,10 @@
+live-usb-gui-antix (0.3.2) unstable; urgency=medium
+
+  * Build for syslinux 6
+
+ -- anticapitalista <antix@operamail.com>  Mon, 25 Apr 2016 17:03:01 +0300
+
+
 live-usb-gui-antix (0.3.1) unstable; urgency=low
  
   * Added no show to .desktop
