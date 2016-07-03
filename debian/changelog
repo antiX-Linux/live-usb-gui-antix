@@ -1,3 +1,9 @@
+live-usb-gui-antix (0.3.3) unstable; urgency=medium
+
+  * Correct location for Help button 
+
+ -- anticapitalista <antix@operamail.com>  Sun, 03 Jul 2016 20:30:28 +0300
+
 live-usb-gui-antix (0.3.2) unstable; urgency=medium
 
   * Build for syslinux 6
